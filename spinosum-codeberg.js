@@ -55,7 +55,7 @@
         URL.revokeObjectURL(lambda.href);
     }
 
-    // Store the current page URL (only if it is Codeberg.com)
+    // Store the current page URL (only if it is https://codeberg.org/)
     storeURL(window.location.href);
 
     // Add a small button to download URLs
