@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/github/license/bormoge/spinosum)](https://github.com/bormoge/spinosum)
+
 # spinosum
 Scripts to download repository URLs.  
 This is a sister project of [sideroxylon](https://github.com/bormoge/sideroxylon) made to easily download repository URLs.
