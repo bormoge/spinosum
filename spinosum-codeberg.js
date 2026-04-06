@@ -50,7 +50,7 @@
         let blob = new Blob([all_urls.join('\n')], { type: 'text/plain' });
         let lambda = document.createElement('a');
         lambda.href = URL.createObjectURL(blob);
-        lambda.download = 'codeberg_repos.org';
+        lambda.download = 'repository_urls.org';
         lambda.click();
         URL.revokeObjectURL(lambda.href);
     }
