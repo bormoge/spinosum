@@ -59,23 +59,47 @@
         URL.revokeObjectURL(lambda.href);
     }
 
+    // Reset stored URLs
+    function clearURLs() {
+        if (confirm('Are you sure you want to clear all stored forge URLs?')) {
+            localStorage.removeItem('forge_repos');
+            console.log('forge_repos cleared');
+        }
+    }
+
     // Store the current forge page URL
     storeURL(window.location.href);
 
-    // Add a small button to download URLs
-    let btn = document.createElement('button');
+    // Add a button to download URLs
+    let downloadBtn = document.createElement('button');
     btn.textContent = 'Download forge URLs';
     btn.style.position = 'fixed';
     btn.style.bottom = '20px';
     btn.style.right = '20px';
     btn.style.zIndex = 10000;
-    btn.style.padding = '10px';
-    btn.style.background = '#FF0000';
+    btn.style.padding = '7px';
+    btn.style.background = '#ff0000';
     btn.style.color = 'white';
     btn.style.border = 'none';
     btn.style.borderRadius = '5px';
     btn.style.cursor = 'pointer';
     btn.onclick = downloadURLs;
-    document.body.appendChild(btn);
+    document.body.appendChild(downloadBtn);
+
+    // Add a button to clear the cache
+    let resetBtn = document.createElement('button');
+    resetBtn.textContent = 'Clear forge URLs';
+    resetBtn.style.position = 'fixed';
+    resetBtn.style.bottom = '70px';
+    resetBtn.style.right = '20px';
+    resetBtn.style.zIndex = 10000;
+    resetBtn.style.padding = '7px';
+    resetBtn.style.background = '#0080ff';
+    resetBtn.style.color = 'white';
+    resetBtn.style.border = 'none';
+    resetBtn.style.borderRadius = '5px';
+    resetBtn.style.cursor = 'pointer';
+    resetBtn.onclick = clearURLs;
+    document.body.appendChild(resetBtn);
 
 })();
