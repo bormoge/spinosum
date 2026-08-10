@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         spinosum-forge-nested
+// @name         spinosum-forge-user-nested
 // @namespace    Violentmonkey Scripts
 // @version      0.1.0
-// @description  Store nested forge URLs as org files
+// @description  Store nested forge user URLs as org files
 // @author       bormoge
 // @match        https://github.com/*
 // @match        https://gitlab.com/*
@@ -15,8 +15,8 @@
 (function() {
     'use strict';
 
-    // Clean the forge URL so only the user and repository names remain.
-    function cleanForgeURL(url) {
+    // Clean the forge user URL so only the user and repository names remain.
+    function cleanForgeUserURL(url) {
         try {
             let urlObj = new URL(url);
 
@@ -25,8 +25,8 @@
 
             let parts = urlObj.pathname.split('/').filter(Boolean);
 
-            if (parts.length >= 2) {
-                return `${urlObj.origin}/${parts[0]}/${parts[1]}`;
+            if (parts.length >= 1) {
+                return `${urlObj.origin}/${parts[0]}`;
             }
 
             return null;
@@ -35,30 +35,30 @@
         }
     }
 
-    // Store the URL if it's valid.
-    function storeForgeURL(url) {
-        let normalized_url = cleanForgeURL(url);
+    // Store the forge user URL if it's valid.
+    function storeForgeUserURL(url) {
+        let normalized_url = cleanForgeUserURL(url);
         if (!normalized_url)
             return;
 
-        let all_urls = JSON.parse(localStorage.getItem('forge_repositories') || '[]');
+        let all_urls = JSON.parse(localStorage.getItem('forge_users') || '[]');
 
         if (!all_urls.includes(normalized_url)) {
             all_urls.push(normalized_url);
-            localStorage.setItem('forge_repositories', JSON.stringify(all_urls));
-            console.log(`Forge URL: ${normalized_url}`);
+            localStorage.setItem('forge_users', JSON.stringify(all_urls));
+            console.log(`Forge User URL: ${normalized_url}`);
         }
     }
 
-    // Search the page for repository URLs.
-    function searchPageForRepos() {
+    // Search the page for forge user links.
+    function searchPageForUsers() {
         let forge_urls = Array.from(document.querySelectorAll('a'));
         forge_urls.forEach(forge_url => {
-            storeForgeURL(forge_url.href);
+            storeForgeUserURL(forge_url.href);
         });
     }
 
     // Starting point.
-    searchPageForRepos();
+    searchPageForUsers();
 
 })();
